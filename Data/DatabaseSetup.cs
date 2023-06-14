@@ -2,7 +2,7 @@
 {
     // This file creates the needed tables in the database
     // RUN IT ONLY ONCE, IT DELETES THE OLD TABLES THEREFORE THE INFO
-    public static class FirstRunOnly
+    public static class DatabaseSetup
     {
         // Dropping all tables that can have the names
         private static string DropTables()
@@ -72,18 +72,15 @@
         }
 
         // The method that should be used to setup the game
-        public static void SetupGame()
+        public static string SetupGame()
         {
-            // Sets the color of the console to green
-            ConsoleColor.Green();
+            // Runs the previous methods
+            string delete = DropTables();
+            string create = CreateTables();
 
-            // Runs the previous methods and outputs the feedback
-            Console.WriteLine(DropTables());
+            string result = delete + "\n" + create + "\n";
 
-            Console.WriteLine(CreateTables());
-
-            // Resets the color of the console
-            Console.ResetColor();
+            return result;
         }
     }
 }
