@@ -18,6 +18,11 @@
             Console.ForegroundColor = System.ConsoleColor.Yellow;
         }
 
+        public static void Blue()
+        {
+            Console.ForegroundColor = System.ConsoleColor.Blue;
+        }
+
         public static void Reset()
         {
             Console.ResetColor();
