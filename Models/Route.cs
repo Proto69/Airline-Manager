@@ -2,20 +2,19 @@
 {
     public class Route
     {
-        public int Id { get; set; }
+        public string Name { get; set; }
         public string From { get; set; }
         public string To { get; set; }
         public int Km { get; set; }
         public int DailyDemand { get; set; }
         public int Fuel { get; set; }
 
-        public Route(int id, string from, string to, double n1, double e1, double n2, double e2, int dailyDemand)
+        public Route(string name, Airport airport_to, Airport airport_from)
         {
-            this.Id = id;
-            this.From = from;
-            this.To = to;
-            this.Km = CalculateDistance(n1, e1, n2, e2);
-            this.DailyDemand = dailyDemand;
+            this.Name = name;
+            this.From = airport_from.City;
+            this.To = airport_to.City;
+            this.Km = CalculateDistance(airport_to.North, airport_to.East, airport_from.North, airport_from.East);
         }
 
         public int CalculateFuel(int fuelPerKm)
