@@ -12,12 +12,24 @@
             return new List<string>() { company_name, airport };
         }
 
-        public static string GetAirportName()
+        public static string GetInfo( string message)
         {
-            Console.WriteLine("Name or ICAO code of the airport: ");
-            string airport = Console.ReadLine();
+            Console.WriteLine(message);
+            return Console.ReadLine();
+        }
 
-            return airport;
+        public static Aircraft GetAircraft(List<Aircraft> aircrafts)
+        {
+            Console.WriteLine("Choose between these aircrafts: (write the number)");
+            ConsoleColor.Blue();
+            for (int i = 0; i < aircrafts.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}:");
+                Console.WriteLine(aircrafts[i]);
+            }
+            ConsoleColor.Reset();
+            int n = int.Parse(Console.ReadLine());
+            return aircrafts[n];
         }
     }
 }
