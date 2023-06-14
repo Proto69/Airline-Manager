@@ -11,7 +11,7 @@
         public int Range { get; set; }
         public int Cost { get; set; }
 
-        public Aircraft(string man, string model,, int pax, int fuel, int speed, int range, int cost)
+        public Aircraft(string man, string model, int pax, int fuel, int speed, int range, int cost)
         {
             this.Manifacturer = man;
             this.Model = model;

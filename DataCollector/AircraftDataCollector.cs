@@ -24,15 +24,14 @@
                 // Assigning the values
                 string man = infoArray[0];
                 string mod = infoArray[1];
-                string type = infoArray[2];
-                int pax = int.Parse(infoArray[3]);
-                int fuel = int.Parse(infoArray[4]);
-                int speed = int.Parse(infoArray[5]);
-                int range = int.Parse(infoArray[6]);
-                int cost = int.Parse(infoArray[7]);
+                int pax = int.Parse(infoArray[2]);
+                int fuel = int.Parse(infoArray[3]);
+                int speed = int.Parse(infoArray[4]);
+                int range = int.Parse(infoArray[5]);
+                int cost = int.Parse(infoArray[6]);
 
                 // Creating a new model with the values 
-                Aircraft aircraft = new(man, mod, type, pax, fuel, speed, range, cost);
+                Aircraft aircraft = new(man, mod, pax, fuel, speed, range, cost);
 
                 // Adding the new model to the list
                 aircrafts.Add(aircraft);
