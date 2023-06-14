@@ -1,7 +1,7 @@
 ﻿namespace Airline_Manager.DataCollector
 {
     // Class to get aircraft data from a file and turn it into a model
-    public static class AircraftData
+    public static class AircraftDataCollector
     {
         // The main file path
         private static string filePath = "C:\\Users\\mnogo\\source\\repos\\Airline Manager\\TextFiles\\AircrafftDatabase.txt";
