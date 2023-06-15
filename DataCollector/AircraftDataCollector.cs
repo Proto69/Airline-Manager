@@ -4,7 +4,7 @@
     public static class AircraftDataCollector
     {
         // The main file path
-        private static string filePath = "C:\\Users\\mnogo\\source\\repos\\Airline Manager\\TextFiles\\AircrafftDatabase.txt";
+        private static string filePath = "C:\\Users\\mnogo\\source\\repos\\Airline Manager\\TextFiles\\AircraftDatabase.txt";
 
         // A method to get all the aircrafts from the file
         public static List<Aircraft> GetAllAircrafts()

@@ -23,7 +23,7 @@
                     
                     // Extracting the different informations
                     string code = infoArray[1];
-                    string city = infoArray[2];
+                    string city = infoArray[3];
                     string country = infoArray[4];
                     double n = double.Parse(infoArray[14]);
                     double e = double.Parse(infoArray[15]);
