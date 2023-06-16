@@ -1,4 +1,6 @@
-﻿namespace Airline_Manager.Controllers
+﻿using Airline_Manager.Models;
+
+namespace Airline_Manager.Controllers
 {
     public static class ProfileSetup
     {
@@ -11,20 +13,11 @@
             // Getting the name and main hub of the new user
             List<string> information = ModelView.GetInformation();
 
-            // Getting the airport
-            Airport airport = AirportData.GetAirport(information[1]);
-
-            // Checking if the airport is found
-            while (airport == null)
-            {
-                // If it's not found, we throw error and get new main hub
-                ErrorView.ThrowError("This airport could not be found!");
-                information[1] = ModelView.GetInfo("Name or ICAO code of the main airport: ");
-                airport = AirportData.GetAirport(information[1]);
-            }
+            // Getting the first and main airport
+            Airport firstAirport = GetFirstAirport(information[1]);
 
             // We set the main hub to the whole name of the city
-            information[1] = airport.City;
+            information[1] = firstAirport.City;
 
             // We save the user in the database and display the feedback
             feedback = UserData.CreateUser(information[0], information[1]);
@@ -35,25 +28,61 @@
             Aircraft aircraft = ModelView.GetAircraft(aircrafts);
 
             // The user chooses the first route for the aircraft
-            string destination = ModelView.GetInfo("Write the airport to which will be your first route: ");
-            Airport airport1 = AirportData.GetAirport(destination);
-            while (airport1 == null)
-            {
-                // If it's not found, we throw error and get new main hub
-                ErrorView.ThrowError("This airport could not be found!");
-                destination = ModelView.GetInfo("Name or ICAO code of the main airport: ");
-                airport = AirportData.GetAirport(destination);
-            }
+            Airport secondAirport = GetSecondAirport(firstAirport);
 
             // Chose the name of the route
             string route_name = ModelView.GetInfo("What will be the name of this route: ");
 
             // Creating the full route
-            Route final_route = new Route(route_name, airport, airport1);
+            Route final_route = new Route(route_name, firstAirport, secondAirport);
 
             // Saving the route and aircraft to the database
             feedback = AircraftData.AddAircraft(aircraft, final_route);
             DatabaseMessageView.DatabaseSuccess(feedback);
+
+            // Saving the game
+            // GameSaver.SaveGame();
+            ModelView.SendMessage("Successfully created the profile!");
         }
+
+        private static Airport GetFirstAirport(string airportName)
+        {
+            Airport firstAirport = AirportDataCollector.GetAirport(airportName);
+
+            // Checking if the airport is found
+            while (firstAirport == null)
+            {
+                // If it's not found, we throw error and get new main hub
+                ErrorView.ThrowError("This airport could not be found!");
+                airportName = ModelView.GetInfo("Name or ICAO code of the main airport: ");
+                firstAirport = AirportDataCollector.GetAirport(airportName);
+            }
+            return firstAirport;
+        }
+
+        private static Airport GetSecondAirport(Airport firstAirport)
+        {
+            while (true)
+            {
+                string destination = ModelView.GetInfo("Write the airport to which will be your first route: ");
+                Airport secondAirport = AirportDataCollector.GetAirport(destination);
+
+                if (secondAirport == null)
+                {
+                    // If it's not found, we throw an error and continue to the next iteration
+                    ErrorView.ThrowError("\nThis airport could not be found!");
+                    continue;
+                }
+
+                if (firstAirport.City == secondAirport.City)
+                {
+                    ErrorView.ThrowError("\nThe two airports can't be the same!");
+                    continue;
+                }
+
+                return secondAirport;
+            }
+        }
+
     }
 }
