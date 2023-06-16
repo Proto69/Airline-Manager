@@ -19,7 +19,7 @@
             cmd_add_aircraft.ExecuteNonQuery();
             conn.Close();
 
-            return result + "Aircraft added successfully! \n";
+            return result + "Aircraft added successfully!";
 
         }
     }

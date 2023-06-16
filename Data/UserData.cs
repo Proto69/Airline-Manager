@@ -21,7 +21,7 @@
             cmd_add_user.ExecuteNonQuery();
             conn.Close();
 
-            return "Successfully saved the user!";
+            return "Successfully saved the user! \n";
         }
 
         public static User GetUser()
