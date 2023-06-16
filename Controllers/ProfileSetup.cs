@@ -41,7 +41,7 @@ namespace Airline_Manager.Controllers
             DatabaseMessageView.DatabaseSuccess(feedback);
 
             // Saving the game
-            // GameSaver.SaveGame();
+            GameSaver.SaveGame();
             ModelView.SendMessage("Successfully created the profile!");
         }
 
