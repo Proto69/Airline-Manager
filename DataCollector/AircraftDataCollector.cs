@@ -4,7 +4,10 @@
     public static class AircraftDataCollector
     {
         // The main file path
-        private static string filePath = "C:\\Users\\mnogo\\source\\repos\\Airline Manager\\TextFiles\\AircraftDatabase.txt";
+        private static string file = @"TextFiles\AirCraftDatabase.txt";
+        private static string currentDirectory = Directory.GetCurrentDirectory();
+        private static string projectDirectory = Directory.GetParent(currentDirectory).Parent.Parent.FullName;
+        private static string filePath = Path.Combine(projectDirectory, file);
 
         // A method to get all the aircrafts from the file
         public static List<Aircraft> GetAllAircrafts()

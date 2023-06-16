@@ -5,7 +5,7 @@
         public static void ThrowError(string message)
         {
             ConsoleColor.Red();
-            Console.WriteLine(message + "\n");
+            Console.WriteLine(message);
             ConsoleColor.Reset();
         }
     }

@@ -8,7 +8,7 @@
             ConsoleColor.Green();
 
             // Gives feedback
-            Console.WriteLine("\n" + feedback + "\n");
+            Console.WriteLine("\n" + feedback);
 
             // Resets the color of the console
             Console.ResetColor();

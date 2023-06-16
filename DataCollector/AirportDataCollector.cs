@@ -1,10 +1,13 @@
 ﻿namespace Airline_Manager.DataCollector
 {
     // Class to get airport data from a file and turn it into a model
-    public static class AirportData
+    public static class AirportDataCollector
     {
         // Address of the file
-        private static string filePath = "C:\\Users\\mnogo\\source\\repos\\Airline Manager\\TextFiles\\GlobalAirportDatabase.txt";
+        private static string file = @"TextFiles\GlobalAirportDatabase.txt"; 
+        private static string currentDirectory = Directory.GetCurrentDirectory();
+        private static string projectDirectory = Directory.GetParent(currentDirectory).Parent.Parent.FullName;
+        private static string filePath = Path.Combine(projectDirectory, file);
 
         // Method to get a specific airport with a keyword
         public static Airport GetAirport(string keyword)

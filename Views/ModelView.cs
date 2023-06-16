@@ -12,7 +12,14 @@
             return new List<string>() { company_name, airport };
         }
 
-        public static string GetInfo( string message)
+        public static void SendMessage(string message)
+        {
+            ConsoleColor.Green();
+            Console.WriteLine("\n" + message);
+            ConsoleColor.Reset();
+        }
+
+        public static string GetInfo(string message)
         {
             Console.WriteLine("\n" + message);
             return Console.ReadLine();
@@ -21,14 +28,21 @@
         public static Aircraft GetAircraft(List<Aircraft> aircrafts)
         {
             Console.WriteLine("Choose between these aircrafts: (write the number) \n");
-            ConsoleColor.Blue();
+
             for (int i = 0; i < aircrafts.Count; i++)
             {
+                ConsoleColor.Yellow();
                 Console.WriteLine($"{i + 1}:");
+                ConsoleColor.Blue();
                 Console.WriteLine(aircrafts[i]);
             }
             ConsoleColor.Reset();
             int n = int.Parse(Console.ReadLine());
+            while (n <= 0 || n > aircrafts.Count)
+            {
+                ErrorView.ThrowError($"\nInvalid number, please choose a number between 1 and {aircrafts.Count}!");
+                n = int.Parse(Console.ReadLine());
+            }
             return aircrafts[n - 1];
         }
     }
