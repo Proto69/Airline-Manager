@@ -34,7 +34,7 @@
                 int cost = int.Parse(infoArray[6]);
 
                 // Creating a new model with the values 
-                Aircraft aircraft = new(man, mod, pax, fuel, speed, range, cost);
+                Aircraft aircraft = new(man, mod, pax, fuel, speed, range, cost, 0);
 
                 // Adding the new model to the list
                 aircrafts.Add(aircraft);
