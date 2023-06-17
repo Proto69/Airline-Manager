@@ -7,7 +7,6 @@
         public string To { get; set; }
         public int Km { get; set; }
         public int DailyDemand { get; set; }
-        public int Fuel { get; set; }
 
         public Route(string name, Airport airport_to, Airport airport_from)
         {
@@ -15,6 +14,14 @@
             this.From = airport_from.City;
             this.To = airport_to.City;
             this.Km = CalculateDistance(airport_to.North, airport_to.East, airport_from.North, airport_from.East);
+        }
+
+        public Route(string name, Airport airport_to, Airport airport_from, int km)
+        {
+            this.Name = name;
+            this.From = airport_from.City;
+            this.To = airport_to.City;
+            this.Km = km;
         }
 
         public int CalculateFuel(int fuelPerKm)
