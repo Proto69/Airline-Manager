@@ -8,7 +8,17 @@
             if (GameSaver.CheckGame())
                 ProfileSetup.NewSetup();
 
-            // Displays a table with all currently owned aircrafts
+            while (true)
+            {
+                try
+                {
+
+                }
+                catch (Exception e)
+                {
+                    ErrorView.ThrowError(e.Message);
+                }
+            }
 
         }
     }
