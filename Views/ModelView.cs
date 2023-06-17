@@ -45,5 +45,16 @@
             }
             return aircrafts[n - 1];
         }
+
+        public static void DisplayAllAircrafts(List<Aircraft> aircrafts)
+        {
+            int max = 0;
+            foreach (Aircraft aircraft in aircrafts)
+            {
+                int n = aircraft.Model.Length + aircraft.Route.Name.Length;
+                if (n > max)
+                    max = n;
+            }
+        }
     }
 }
