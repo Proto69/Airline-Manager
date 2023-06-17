@@ -24,7 +24,7 @@ namespace Airline_Manager.Controllers
             DatabaseMessageView.DatabaseSuccess(feedback);
 
             // The user chooses his first aircraft
-            List<Aircraft> aircrafts = GlobalVariables.Aircrafts.Where(x => x.Model == "B737-800" || x.Model == "A320-200").ToList();
+            List<Aircraft> aircrafts = GlobalVariables.AircraftsTxtFile.Where(x => x.Model == "B737-800" || x.Model == "A320-200").ToList();
             Aircraft aircraft = ModelView.GetAircraft(aircrafts);
 
             // The user chooses the first route for the aircraft
