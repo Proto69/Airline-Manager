@@ -20,5 +20,32 @@
 
             return "Route added successfully!";
         }
+
+        public static List<Route> GetAllRoutes()
+        {
+            List<Route> routes = new List<Route>();
+
+            MySqlConnection conn = Database.GetConnection();
+
+            string query = "SELECT * FROM routes";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            conn.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                string from = reader["from"].ToString();
+                string to = reader["to"].ToString();
+                int km = int.Parse(reader["km"].ToString());
+                string name = reader["name"].ToString();
+
+                Route route = new(name, AirportDataCollector.GetAirport(to), AirportDataCollector.GetAirport(from), km);
+                routes.Add(route);
+            }
+            conn.Close();
+
+            return routes;
+        }
     }
 }

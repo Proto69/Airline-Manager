@@ -48,7 +48,7 @@
             string query_hubs = "CREATE TABLE IF NOT EXISTS hubs ( name VARCHAR(225) PRIMARY KEY );";
             string query_user = "CREATE TABLE IF NOT EXISTS user_info ( company_name VARCHAR(50) PRIMARY KEY, balance INT NOT NULL DEFAULT 0, fuel INT NOT NULL DEFAULT 0, main_hub VARCHAR(225) NOT NULL, CONSTRAINT fk_hubs FOREIGN KEY (main_hub) REFERENCES hubs(name) );";
             string query_routes = "CREATE TABLE IF NOT EXISTS routes ( name VARCHAR(225) PRIMARY KEY, `from` VARCHAR(225) NOT NULL, `to` VARCHAR(225) NOT NULL, km INT NOT NULL);";
-            string query_aircrafts = "CREATE TABLE IF NOT EXISTS aircrafts ( name VARCHAR(225) PRIMARY KEY, route VARCHAR(225) NOT NULL, wear INT NOT NULL DEFAULT 0, airborne BOOLEAN NOT NULL DEFAULT FALSE, CONSTRAINT fk_routes FOREIGN KEY (route) REFERENCES routes (name) );";
+            string query_aircrafts = "CREATE TABLE IF NOT EXISTS aircrafts ( id INT AUTO_INCREMENT PRIMARY KEY, model VARCHAR(255) NOT NULL, route VARCHAR(225) NOT NULL, wear INT NOT NULL DEFAULT 0, airborne BOOLEAN NOT NULL DEFAULT FALSE, landing DATETIME NULL, CONSTRAINT fk_routes FOREIGN KEY (route) REFERENCES routes (name) );";
 
             // Creating the commands corresponding to the query
             MySqlCommand cmd_hubs = new MySqlCommand(query_hubs, conn);
