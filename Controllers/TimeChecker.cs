@@ -7,9 +7,9 @@
             List<Aircraft> list = AircraftData.GetAll();
             foreach (Aircraft aircraft in list)
             {
-                if (aircraft.Landing <= DateTime.Now)
+                if (aircraft.Airborne && aircraft.Landing <= DateTime.Now)
                 {
-                    aircraft.Land();
+                    ModelView.SendMessage(aircraft.Land());
                 }
             }
         }
@@ -17,7 +17,8 @@
         public static string TimeLeft(Aircraft aircraft)
         {
             DateTime time = DateTime.Now;
-            return (time - aircraft.Landing).ToString("HH:mm:ss");
+            TimeSpan result = aircraft.Landing - time;
+            return $"{result.Hours}:{result.Minutes}:{result.Seconds}";
         }
     }
 }
