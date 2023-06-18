@@ -66,6 +66,8 @@ namespace Airline_Manager.Views
             PrintCol("|");
             PrintWord(" Route name", max);
             PrintCol("|");
+            PrintWord(" Wear", max);
+            PrintCol("|");
             PrintWord(" Status", max);
             PrintCol("|");
             PrintWord(" Landing in", max);
@@ -106,6 +108,9 @@ namespace Airline_Manager.Views
             Console.Write(new string('-', max));
             PrintCol("|");
             ConsoleColor.Blue();
+            Console.Write(new string('-', max));
+            PrintCol("|");
+            ConsoleColor.Blue();
             Console.WriteLine(new string('-', max));
             ConsoleColor.Reset();
         }
@@ -115,6 +120,8 @@ namespace Airline_Manager.Views
             PrintWord(" " + aircraft.Model, max);
             PrintCol("|");
             PrintWord(" " + aircraft.Route.Name, max);
+            PrintCol("|");
+            PrintWord(" " + aircraft.Wear + " %", max);
             PrintCol("|");
             if (aircraft.Airborne)
             {
