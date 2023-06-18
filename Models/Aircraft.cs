@@ -34,10 +34,10 @@
             this.Route = route;
         }
 
-        public void Land()
+        public string Land()
         {
             Airborne = false;
-            AircraftData.Land(this);
+            return AircraftData.Land(this);
         }
 
         public void Depart()
