@@ -1,4 +1,7 @@
-﻿namespace Airline_Manager.Data
+﻿using System.ComponentModel.Design.Serialization;
+using System.Globalization;
+
+namespace Airline_Manager.Data
 {
     public static class AircraftData
     {
@@ -26,6 +29,8 @@
         {
             List<Aircraft> aircrafts = new();
 
+            List<Route> routes = RouteData.GetAllRoutes();
+
             MySqlConnection conn = Database.GetConnection();
 
             string query = "SELECT * FROM aircrafts";
@@ -42,11 +47,15 @@
                 string model = reader["model"].ToString();
                 DateTime landing = DateTime.Now;
                 if (airborne)
-                    landing = DateTime.ParseExact(reader["landing"].ToString(), "yyyy-MM-dd HH-mm-ss", null);
+                {
+                    string time = reader["landing"].ToString();
+                    landing = DateTime.Parse(time);
+                }
                 Aircraft aircraft = GlobalVariables.AircraftsTxtFile.Where(x => x.Model == model).ToList()[0];
                 aircraft.Airborne = airborne;
                 aircraft.Wear = wear;
-                aircraft.Route = GlobalVariables.Routes.Where(x => x.Name == route).First();
+                routes = routes.Where(x => x.Name == route).ToList();
+                aircraft.Route = routes[0];
                 if (airborne)
                     aircraft.Landing = landing;
                 aircrafts.Add(aircraft);
@@ -80,18 +89,17 @@
         {
             MySqlConnection conn = Database.GetConnection();
 
-            string query = "UPDATE aircrafts SET airborne = false, landing = null WHERE route = @route;";
+            string query = "UPDATE aircrafts SET airborne = false, landing = null WHERE landing = @landing;";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
 
-            cmd.Parameters.AddWithValue("@route", aircraft.Route);
+            cmd.Parameters.AddWithValue("@landing", aircraft.Landing);
 
             conn.Open();
             int n = cmd.ExecuteNonQuery();
-            if (n > 0)
-                return $"Aircraft {aircraft.Model} landed!";
             conn.Close();
-            throw new InvalidOperationException("Something went wrong!");
+            return $"Aircraft {aircraft.Model} on route {aircraft.Route.Name} landed!";
+
         }
     }
 }
