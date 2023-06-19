@@ -2,7 +2,7 @@
 {
     public static class RouteData
     {
-        public static string AddRoute(Route route)
+        public static string Add(Route route)
         {
             MySqlConnection conn = Database.GetConnection();
 
@@ -21,7 +21,7 @@
             return "Route added successfully!";
         }
 
-        public static List<Route> GetAllRoutes()
+        public static List<Route> GetAll()
         {
             List<Route> routes = new List<Route>();
 
@@ -46,6 +46,22 @@
             conn.Close();
 
             return routes;
+        }
+
+        public static void Update(Route route)
+        {
+            MySqlConnection conn = Database.GetConnection();
+
+            string query = "UPDATE routes SET daily_demand = @dd WHERE name = @name";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            cmd.Parameters.AddWithValue("@dd", route.DailyDemand);
+            cmd.Parameters.AddWithValue("@name", route.Name);
+
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            conn.Close();
         }
     }
 }

@@ -3,7 +3,7 @@
     public class User
     {
         public string Name { get; set; }
-        public int Balance { get; set; }
+        public double Balance { get; set; }
         public int Fuel { get; set; }
         public string MainHub { get; set; }
         List<string> Hubs { get; set; }

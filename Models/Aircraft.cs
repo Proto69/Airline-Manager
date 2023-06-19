@@ -40,7 +40,7 @@
             return AircraftData.Land(this);
         }
 
-        public void Depart()
+        public double Depart()
         {
             if (Wear >= 80)
                 throw new InvalidOperationException("You should fix this aircraft before departure!");
@@ -50,9 +50,23 @@
                 throw new InvalidOperationException("This plane is already airborne!");
             Wear += (int)Math.Round(Route.Km * 0.002);
             GlobalVariables.User.Fuel -= Route.CalculateFuel(FuelConsumption);
+            
             Airborne = true;
             Landing = CalculateTime();
             AircraftData.Depart(this);
+            if (Route.DailyDemand >= Passangers)
+            {
+                Route.DailyDemand -= Passangers;
+                RouteData.Update(Route);
+                return Passangers * Route.Km * 0.7;
+            }
+            else
+            {
+                int pax = Route.DailyDemand;
+                Route.DailyDemand = 0;
+                RouteData.Update(Route);
+                return pax * Route.Km * 0.8;
+            }
         }
 
         private DateTime CalculateTime()

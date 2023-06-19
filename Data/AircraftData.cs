@@ -9,7 +9,7 @@ namespace Airline_Manager.Data
         {
             MySqlConnection conn = Database.GetConnection();
 
-            string result = RouteData.AddRoute(route) + "\n";
+            string result = RouteData.Add(route) + "\n";
 
             string query_add_aircraft = "INSERT INTO aircrafts (route, model) VALUES (@route, @model);";
 
@@ -29,7 +29,7 @@ namespace Airline_Manager.Data
         {
             List<Aircraft> aircrafts = new();
 
-            List<Route> routes = RouteData.GetAllRoutes();
+            List<Route> routes = RouteData.GetAll();
 
             MySqlConnection conn = Database.GetConnection();
 

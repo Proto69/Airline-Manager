@@ -42,11 +42,27 @@
             {
                 user.Name = reader["company_name"].ToString();
                 user.Fuel = int.Parse(reader["fuel"].ToString());
-                user.Balance = int.Parse(reader["balance"].ToString());
+                user.Balance = double.Parse(reader["balance"].ToString());
                 user.MainHub = reader["main_hub"].ToString();
             }
 
             return user;
+        }
+
+        public static void UpdateUser(User user)
+        {
+            MySqlConnection conn = Database.GetConnection();
+
+            string query = "UPDATE user_info SET balance = @balance, fuel = @fuel";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            cmd.Parameters.AddWithValue("@fuel", user.Fuel);
+            cmd.Parameters.AddWithValue("@balance", user.Balance);
+
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            conn.Close();
         }
     }
 }
